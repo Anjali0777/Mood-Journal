@@ -1,0 +1,21 @@
+﻿@using Blazorise.Charts
+
+<BarChart TItem="int" TLabel="string" @ref="chart" />
+
+<button @onclick="LoadData">Load Data</button>
+
+@code {
+    private BarChart<int,string> chart;
+
+    private async Task LoadData()
+    {
+        await chart.AddLabelsAsync(new[] { "Happy", "Sad", "Anxious", "Calm" });
+        await chart.AddDataSetAsync(new BarChartDataset<int>
+            {
+                Label = "Mood Frequency",
+                Data = new[] { 10, 5, 7, 8 },
+                BackgroundColor = new[] { "#36A2EB", "#FF6384", "#FFCE56", "#4BC0C0" }
+            });
+        await chart.Update();
+    }
+}

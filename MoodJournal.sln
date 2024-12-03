@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoodJournal", "MoodJournal.csproj", "{4EBD29A1-3476-410B-B8D7-A4EEB5E9A971}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4EBD29A1-3476-410B-B8D7-A4EEB5E9A971}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EBD29A1-3476-410B-B8D7-A4EEB5E9A971}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EBD29A1-3476-410B-B8D7-A4EEB5E9A971}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EBD29A1-3476-410B-B8D7-A4EEB5E9A971}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1CDB15B9-447B-4F86-895B-0A536E7AA8B9}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,31 @@
+﻿@page "/calendar"
+@inject MoodService MoodService
+
+<h1>Mood Calendar</h1>
+
+<div class="calendar">
+    @foreach (var day in Enumerable.Range(1, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)))
+    {
+        var date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, day);
+        var moodEntry = MoodService.GetMoodEntries().FirstOrDefault(e => e.Date.Date == date);
+
+            <div class="calendar-day">
+                <strong>@date.ToShortDateString()</strong>
+                <p>@(moodEntry != null ? moodEntry.Mood.ToString() : "No entry")</p>
+            </div>
+    }
+</div>
+
+<style>
+    .calendar {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 10px;
+    }
+
+    .calendar-day {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+    }
+</style>

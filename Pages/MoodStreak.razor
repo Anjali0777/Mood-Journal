@@ -1,0 +1,19 @@
+﻿@using MoodJournal.Services
+@inject MoodService MoodService
+
+<h3>Achievements</h3>
+<p>@GetStreakMessage()</p>
+
+@code {
+    private string GetStreakMessage()
+    {
+        var entries = MoodService.GetMoodEntries();
+        var streak = entries.GroupBy(e => e.Date.Date)
+                            .OrderByDescending(g => g.Count())
+                            .Count();
+
+        if (streak >= 7)
+            return "Congrats! You’ve logged 7 days in a row!";
+        return $"Current Streak: {streak} days.";
+    }
+}

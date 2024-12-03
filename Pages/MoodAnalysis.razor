@@ -1,0 +1,22 @@
+﻿@page "/analysis"
+@using MoodJournal.Services
+@inject MoodService MoodService
+
+<h1>Mood Analysis</h1>
+
+<p>Total Entries: @MoodService.GetMoodEntries().Count</p>
+
+<MoodGraph />
+
+
+@code {
+    private MoodType GetMostCommonMood()
+    {
+        return MoodService.GetMoodEntries()
+            .GroupBy(e => e.Mood)
+            .OrderByDescending(g => g.Count())
+            .Select(g => g.Key)
+            .FirstOrDefault();
+    }
+}
+

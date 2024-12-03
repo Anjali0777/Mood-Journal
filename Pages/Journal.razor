@@ -1,0 +1,106 @@
+﻿@page "/journal"
+@using MoodJournal.Models
+@using MoodJournal.Services
+@inject MoodService MoodService
+
+<h1>Mood Journal</h1>
+
+<div class="journal-container">
+    <div class="log-section">
+        <h2>Log Your Mood</h2>
+        <label for="mood">Select Mood:</label>
+        <select @bind="newMood.Mood" id="mood" class="form-select">
+            @foreach (var mood in Enum.GetValues(typeof(MoodType)).Cast<MoodType>())
+            {
+                    <option value="@mood">@mood</option>
+            }
+        </select>
+        <br />
+        <label for="notes">Notes:</label>
+        <textarea id="notes" class="form-control" @bind="newMood.Notes"></textarea>
+        <br />
+        <button @onclick="SaveMood" class="btn btn-success">Save Mood</button>
+        @if (successMessage != null)
+        {
+                <p style="color: green">@successMessage</p>
+        }
+    </div>
+
+    <div class="history-section">
+        <h2>Logged Moods</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Mood</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var entry in MoodService.GetMoodEntries())
+                {
+                        <tr>
+                            <td>@entry.Date.ToShortDateString()</td>
+                            <td>@entry.Mood</td>
+                            <td>@entry.Notes</td>
+                        </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .journal-container {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px;
+        gap: 20px;
+    }
+
+    .log-section, .history-section {
+        flex: 1;
+    }
+
+    h1, h2 {
+        font-family: Arial, sans-serif;
+        color: #2c3e50;
+    }
+
+    .form-select, .form-control {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .btn {
+        font-size: 16px;
+        padding: 8px 16px;
+        border-radius: 5px;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table th, .table td {
+        padding: 10px;
+        border: 1px solid #ddd;
+    }
+
+    .table th {
+        background-color: #f4f4f4;
+    }
+</style>
+
+@code {
+    private MoodEntry newMood = new MoodEntry();
+    private string? successMessage;
+
+    private void SaveMood()
+    {
+        MoodService.AddMoodEntry(newMood);
+        newMood = new MoodEntry(); // Reset form
+        successMessage = "Mood saved successfully!";
+    }
+}
